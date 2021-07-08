@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: n1
+  name: n1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: n1
+    spec:
+      containers:
+      - image: kibeomcho/nginx:0.1
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: n1
+  name: n1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: n1
+  type: NodePort
+status:
+  loadBalancer: {}
+---
